@@ -74,7 +74,30 @@ public class AppAssignment2 {
                     }
                     break;
 
-               
+                case CREAT_NEW_ACCOUNT:
+                    String newAccountId = String.format("SDB-%05d", accountIdCounter);
+                    String newName;
+                    boolean valid;
+
+                    do {
+                        valid = true;
+                        System.out.print("\tEnter A/C Name: ");
+                        newName = SCANNER.nextLine().strip();
+                        if (newName.isBlank()) {
+                            System.out.printf(ERROR_MSG, "A/C name can't be empty");
+                            valid = false;
+                            continue;
+                        }
+                        for (int i = 0; i < newName.length(); i++) {
+                            if (!(Character.isLetter(newName.charAt(i)) || Character.isSpaceChar(newName.charAt(i)))) {
+                                System.out.printf(ERROR_MSG, "Invalid A/C name");
+                                valid = false;
+                                break;
+                            }
+                        }
+                    } while (!valid);
+
+                   
             }
         } while (true);
     }
