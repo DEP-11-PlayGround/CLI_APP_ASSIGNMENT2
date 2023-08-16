@@ -97,7 +97,46 @@ public class AppAssignment2 {
                         }
                     } while (!valid);
 
-                   
+                    int initialDeposit;
+
+                    do {
+                        valid = true;
+                        System.out.print("Enter your Deposited Amount Here: ");
+                        initialDeposit = SCANNER.nextInt();
+                        SCANNER.nextLine();
+
+                        if (initialDeposit > 5000) {
+                            System.out.println("Initial Deposit: " + initialDeposit);
+                            System.out.println();
+                        } else {
+                            System.out.printf(ERROR_MSG, "Not Sufficient Amount In Your A/C");
+                            valid = false;
+                            continue;
+                        }
+                    } while (!valid);
+
+                    String[] newAccount = {newAccountId, newName, String.valueOf(initialDeposit)};
+                    String[][] newAccounts = new String[accounts.length + 1][3];
+                    for (int i = 0; i < accounts.length; i++) {
+                        newAccounts[i] = accounts[i];
+                    }
+                    newAccounts[newAccounts.length - 1] = newAccount;
+                    accounts = newAccounts;
+
+                    accountIdCounter++;
+
+                    System.out.printf(SUCCESS_MSG, String.format("%s:%s has been saved successfully", newAccountId, newName));
+                    System.out.print("\tDo you want to continue adding (Y/n)? ");
+                    if (SCANNER.nextLine().strip().equalsIgnoreCase("Y")) {
+                        continue;
+                    }
+                    screen = DASHBOARD;
+                    break;
+
+
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    break;
             }
         } while (true);
     }
